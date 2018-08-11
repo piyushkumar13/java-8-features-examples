@@ -1,5 +1,6 @@
 package com.piyush.practice.streams;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -51,6 +52,14 @@ public class StreamExample {
         System.out.println("Using stream of method");
         Stream.of("ABC","XYZ","abc","xyz").forEach(System.out::println);
 
+        System.out.println("Converting arrays to stream");
+        String[] arr = new String[]{"pqrs","abcd"};
+        Stream<String> stringStream = Arrays.stream(arr);
+        stringStream.forEach(System.out::println);
+
+        System.out.println("Using stream builder");
+        Stream<String> streamBuilder = Stream.<String>builder().add("adb").add("acd").build();
+        streamBuilder.forEachOrdered(System.out::println);
 
     }
 }
