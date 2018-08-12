@@ -4,6 +4,8 @@ import com.piyush.practice.domain.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * @author Piyush Kumar.
@@ -17,11 +19,11 @@ public class ParallelStreamExample {
      * iterating over huge amount of data.
      * Before Java 8, to use the capability of multi core, you manually have to write the multithreaded program which will run on the multiple
      * cores. But now you dont have to write lot of code to handle multithreading, just one call to parallelstream() will do it for you.
-     *
+     * <p>
      * Note : If you notice the output of the program, it will not give the result in the order though linkedlist maintains the order. Thats
      * because multiple threads are working on the linkedlist.
      */
-    private void executeParallelStream(List<Student> students){
+    private void executeParallelStream(List<Student> students) {
         students.parallelStream().forEach(System.out::println);
 
     }
@@ -41,6 +43,22 @@ public class ParallelStreamExample {
         students.add(Student.builder().id(11).name("Hitesh").address("New Delhi").build());
 
         new ParallelStreamExample().executeParallelStream(students);
+
+
+        System.out.println("\n-------------------------Parallel Stream from IntStream,DoubleStream and LongStream------------");
+
+        IntStream integerStream = IntStream.range(1, 10).parallel();
+        System.out.println("Whether integerStream is parallel or not :: " + integerStream.isParallel());
+
+        System.out.println("\n--------------------------Converting parallel stream to sequential stream-----------------------");
+
+        /*
+        * We can convert the parallel stream to sequential stream by sequential() method. We can also convert the sequential stream to
+        * parallel stream by parallel() method.
+        */
+        IntStream seqIntegerStream = integerStream.sequential();
+        System.out.println("Whether seqIntegerStream is parallel or not :: " + integerStream.isParallel());
+
     }
 
 }
