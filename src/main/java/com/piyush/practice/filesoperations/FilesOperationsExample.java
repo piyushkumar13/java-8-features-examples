@@ -64,6 +64,7 @@ public class FilesOperationsExample {
         names.add("Satish");
         names.add("Iswar");
         names.add("Sourab");
+        names.add("Vikas");
 
         try {
             Path path1 = Files.write(path, names, Charset.forName("UTF-8"), StandardOpenOption.WRITE);
