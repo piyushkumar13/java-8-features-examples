@@ -59,6 +59,7 @@ public class ParallelStreamExample {
         IntStream seqIntegerStream = integerStream.sequential();
         System.out.println("Whether seqIntegerStream is parallel or not :: " + integerStream.isParallel());
 
+        System.out.println(Runtime.getRuntime().availableProcessors());
     }
 
 }
