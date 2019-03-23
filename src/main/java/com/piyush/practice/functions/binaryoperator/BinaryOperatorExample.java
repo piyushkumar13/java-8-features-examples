@@ -43,6 +43,12 @@ public class BinaryOperatorExample {
 
         Comparator<Student> studentComparator = Comparator.comparing(Student::getMarkPercentage);
 
+        BinaryOperator<Student> binaryOperator1 = BinaryOperator.maxBy(studentComparator);
+        System.out.println(binaryOperator1.apply(students.get(7), students.get(1)));
+
+        BinaryOperator<Student> binaryOperator2 = BinaryOperator.minBy(studentComparator);
+        System.out.println(binaryOperator2.apply(students.get(0), students.get(1)));
+
         /* We can also use Collectors.minBy(..) to get the minimum marks. */
         Map<String, Optional<Student>> optionalMap = students.stream().collect(Collectors.groupingBy(Student::getSubject, Collectors.maxBy(studentComparator)));
 
