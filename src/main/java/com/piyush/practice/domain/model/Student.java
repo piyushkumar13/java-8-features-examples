@@ -18,5 +18,6 @@ public class Student {
     private String address;
     private int markPercentage;
     private String subject;
+    private String[] courses;
 
 }
