@@ -39,7 +39,7 @@ public class ThenComposeExample {
         CompletableFuture<CompletableFuture<String>> completableFutureForThenCompose = CompletableFuture.supplyAsync(ThenComposeExample::getMessage);
         completableFutureForThenCompose.thenCompose(cf -> {
             System.out.println("The input here is CompletableFuture object only :::" + cf);
-            return cf; // Here s is CompletableFuture which will get flattened by thenCompose and passed to thenAccept as String
+            return cf; // Here cf is CompletableFuture which will get flattened by thenCompose and passed to thenAccept as String
         }).thenAccept(s -> {
             System.out.println("The input here is String object ::: " + s);
         });
