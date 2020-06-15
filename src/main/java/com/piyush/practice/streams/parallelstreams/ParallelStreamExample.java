@@ -3,9 +3,8 @@ package com.piyush.practice.streams.parallelstreams;
 import com.piyush.practice.domain.model.Student;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * @author Piyush Kumar.
@@ -24,7 +23,9 @@ public class ParallelStreamExample {
      * because multiple threads are working on the linkedlist.
      */
     private void executeParallelStream(List<Student> students) {
-        students.parallelStream().forEach(System.out::println);
+        students.parallelStream().peek(student -> {
+            System.out.println("This is peek for " + student);
+        }).forEach(System.out::println);
 
     }
 
@@ -42,24 +43,65 @@ public class ParallelStreamExample {
         students.add(Student.builder().id(10).name("Teenu").address("New Delhi").build());
         students.add(Student.builder().id(11).name("Hitesh").address("New Delhi").build());
 
-        new ParallelStreamExample().executeParallelStream(students);
+//        new ParallelStreamExample().executeParallelStream(students);
 
 
-        System.out.println("\n-------------------------Parallel Stream from IntStream,DoubleStream and LongStream------------");
+//        System.out.println("\n-------------------------Parallel Stream from IntStream,DoubleStream and LongStream------------");
+//
+//        IntStream integerStream = IntStream.range(1, 10).parallel();
+//        System.out.println("Whether integerStream is parallel or not :: " + integerStream.isParallel());
+//
+//        System.out.println("\n--------------------------Converting parallel stream to sequential stream-----------------------");
+//
+//        /*
+//        * We can convert the parallel stream to sequential stream by sequential() method. We can also convert the sequential stream to
+//        * parallel stream by parallel() method.
+//        */
+//        IntStream seqIntegerStream = integerStream.sequential();
+//        System.out.println("Whether seqIntegerStream is parallel or not :: " + integerStream.isParallel());
+//
+//        System.out.println(Runtime.getRuntime().availableProcessors());
 
-        IntStream integerStream = IntStream.range(1, 10).parallel();
-        System.out.println("Whether integerStream is parallel or not :: " + integerStream.isParallel());
+//
+//        IntStream stream1 = IntStream.range(0, 100000);
+//
+//        long startTime1 = System.currentTimeMillis();
+//        stream1.forEach(i -> {});
+//        long endTime1 = System.currentTimeMillis();
+//        System.out.println("the time taken on parallel with for each ordered "+(endTime1-startTime1));
 
-        System.out.println("\n--------------------------Converting parallel stream to sequential stream-----------------------");
 
-        /*
-        * We can convert the parallel stream to sequential stream by sequential() method. We can also convert the sequential stream to
-        * parallel stream by parallel() method.
-        */
-        IntStream seqIntegerStream = integerStream.sequential();
-        System.out.println("Whether seqIntegerStream is parallel or not :: " + integerStream.isParallel());
+//        IntStream stream = IntStream.range(1, 100000);
+//
+//        long startTime = System.currentTimeMillis();
+//        stream.parallel().filter(i -> {
+//            System.out.println("filter for i :: " + i);
+//            return i%2 == 0;
+//        }).skip(2).forEach((i) -> { // you can change to forEach also
+//            System.out.println("yo"+i +"yo");
+//
+//        } );
+//        long endTime = System.currentTimeMillis();
+//        System.out.println("the time taken on parllel for each "+(endTime-startTime));
 
-        System.out.println(Runtime.getRuntime().availableProcessors());
+
+        List<Integer> someList = Arrays.asList(1,2,3,4,5);
+//        someList.stream().map(i -> {
+//            System.out.println("Normal Stream : "+i);
+//            return i*2;
+//        }).forEach(System.out::println); // this is sequential stream
+
+
+        System.out.println("this is parallel stream");
+
+
+        someList.parallelStream().map(i -> {
+            System.out.println(Thread.currentThread().getName()+" Parallel Stream : "+i);
+            return i*2;
+        }).forEachOrdered(System.out::println);
+
+
+
     }
 
 }
