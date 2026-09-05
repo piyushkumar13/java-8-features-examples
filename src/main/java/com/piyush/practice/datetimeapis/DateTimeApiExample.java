@@ -9,8 +9,15 @@ import java.time.*;
 public class DateTimeApiExample {
 
     public static void main(String[] args) {
+
         LocalDate localDate = LocalDate.now();
         System.out.println("Todays date is ::: " + localDate);
+
+        Instant instant = Instant.now();
+        long epochSecond = instant.getEpochSecond();
+        long epochMilli = instant.toEpochMilli();
+        System.out.println("Todays date is ::: " + epochSecond);
+        System.out.println("Todays date is ::: " + epochMilli);
 
         System.out.println("The day of the month is ::: " + localDate.getDayOfMonth());
         System.out.println("The month is ::: " + localDate.getDayOfMonth());
