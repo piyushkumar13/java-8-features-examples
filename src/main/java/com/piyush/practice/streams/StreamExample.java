@@ -3,6 +3,7 @@ package com.piyush.practice.streams;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
@@ -60,6 +61,14 @@ public class StreamExample {
         System.out.println("Using stream builder");
         Stream<String> streamBuilder = Stream.<String>builder().add("adb").add("acd").build();
         streamBuilder.forEachOrdered(System.out::println);
+
+
+        IntStream range1 = IntStream.range(1, 10);
+        range1.forEach(System.out::println);
+
+        Stream<Integer> boxed = IntStream.range(1, 10).boxed();
+        boxed.forEach(System.out::println);
+
 
     }
 }
